@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>KOPMANTARA | Koperasi Multi Pihak Pengusaha Muda Mandiri Nusantara</title>
+<title>KOPMANTARA DIGITAL PLATFORM</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -14,7 +14,7 @@
 body{
 font-family:'Poppins',sans-serif;
 margin:0;
-background:#f5f7fb;
+background:#f4f7fb;
 color:#222;
 }
 
@@ -23,7 +23,7 @@ color:#222;
 header{
 background:#0b1f3a;
 color:white;
-padding:15px;
+padding:15px 0;
 position:sticky;
 top:0;
 z-index:1000;
@@ -43,14 +43,13 @@ align-items:center;
 
 .logo{
 font-weight:700;
-font-size:20px;
+font-size:22px;
 }
 
 nav a{
 color:white;
 margin-left:20px;
 text-decoration:none;
-font-weight:500;
 cursor:pointer;
 }
 
@@ -69,21 +68,21 @@ color:white;
 }
 
 .hero h1{
-font-size:45px;
+font-size:48px;
 max-width:900px;
 }
 
 .hero p{
-max-width:700px;
+max-width:650px;
 margin:auto;
 }
 
 .btn{
 background:#caa85d;
 padding:12px 25px;
+border-radius:6px;
 color:white;
 text-decoration:none;
-border-radius:6px;
 display:inline-block;
 margin-top:20px;
 cursor:pointer;
@@ -100,7 +99,7 @@ text-align:center;
 margin-bottom:40px;
 }
 
-/* CARDS */
+/* CARD GRID */
 
 .cards{
 display:grid;
@@ -112,28 +111,18 @@ gap:25px;
 background:white;
 padding:25px;
 border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
 
-.card button{
-background:#0b1f3a;
-color:white;
-border:none;
-padding:10px 20px;
-margin-top:10px;
-cursor:pointer;
-}
-
-/* PORTAL */
+/* LOGIN */
 
 .portal{
-background:#ffffff;
+max-width:450px;
+margin:auto;
+background:white;
 padding:40px;
 border-radius:10px;
-max-width:500px;
-margin:auto;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
 input,textarea{
@@ -146,11 +135,25 @@ border:1px solid #ddd;
 
 /* DASHBOARD */
 
-.dashboard{
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.stat{
 background:white;
-padding:40px;
+padding:25px;
 border-radius:10px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+/* MARKET */
+
+.product img{
+width:100%;
+border-radius:6px;
 }
 
 /* FOOTER */
@@ -160,7 +163,6 @@ background:#0b1f3a;
 color:white;
 text-align:center;
 padding:25px;
-margin-top:40px;
 }
 
 </style>
@@ -177,13 +179,12 @@ margin-top:40px;
 
 <nav>
 
-<a onclick="showSection('home')">Home</a>
-<a onclick="showSection('about')">Tentang</a>
-<a onclick="showSection('program')">Program</a>
-<a onclick="showSection('market')">Marketplace</a>
-<a onclick="showSection('portal')">Portal Anggota</a>
-<a onclick="showSection('dashboard')">Dashboard</a>
-<a onclick="showSection('contact')">Kontak</a>
+<a onclick="show('home')">Home</a>
+<a onclick="show('platform')">Platform</a>
+<a onclick="show('market')">Marketplace</a>
+<a onclick="show('login')">Login</a>
+<a onclick="show('dashboard')">Dashboard</a>
+<a onclick="show('contact')">Kontak</a>
 
 </nav>
 
@@ -197,72 +198,47 @@ margin-top:40px;
 
 <div>
 
-<h1>Koperasi Multi Pihak Pengusaha Muda Mandiri Nusantara</h1>
+<h1>Platform Koperasi Digital Pengusaha Muda Indonesia</h1>
 
 <p>
-Membangun ekosistem kewirausahaan nasional berbasis koperasi modern
-yang mengintegrasikan pengusaha muda, investor, profesional,
-dan masyarakat dalam satu platform ekonomi kolaboratif.
+KOPMANTARA adalah ekosistem koperasi digital yang menghubungkan
+pengusaha, investor, dan UMKM dalam satu platform ekonomi kolaboratif nasional.
 </p>
 
-<a class="btn" onclick="showSection('portal')">Gabung Anggota</a>
+<a class="btn" onclick="show('login')">Gabung Sekarang</a>
 
 </div>
 
 </section>
 
-<!-- ABOUT -->
+<!-- PLATFORM -->
 
-<section id="about">
-
-<div class="container">
-
-<h2>Tentang KOPMANTARA</h2>
-
-<p style="text-align:center;max-width:800px;margin:auto">
-
-KOPMANTARA merupakan koperasi multi pihak yang mengintegrasikan
-pengusaha muda, investor, pekerja profesional, dan masyarakat
-dalam satu ekosistem ekonomi kolaboratif berbasis koperasi digital.
-
-Koperasi ini bertujuan memperkuat ekonomi nasional melalui
-pengembangan UMKM, digitalisasi bisnis, serta pembangunan jaringan
-usaha nasional dan global.
-
-</p>
-
-</div>
-
-</section>
-
-<!-- PROGRAM -->
-
-<section id="program">
+<section id="platform">
 
 <div class="container">
 
-<h2>Program Unggulan</h2>
+<h2>Ekosistem Digital KOPMANTARA</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>Inkubasi Startup</h3>
-<p>Mendampingi pengusaha muda membangun bisnis inovatif.</p>
+<h3>Digital Cooperative</h3>
+<p>Sistem koperasi modern berbasis platform digital.</p>
 </div>
 
 <div class="card">
-<h3>Pendanaan Usaha</h3>
-<p>Akses pembiayaan koperasi bagi anggota.</p>
+<h3>Simpan Pinjam</h3>
+<p>Pembiayaan usaha anggota dengan sistem transparan.</p>
 </div>
 
 <div class="card">
-<h3>Digitalisasi UMKM</h3>
-<p>Membantu UMKM masuk ke ekosistem digital.</p>
+<h3>Marketplace UMKM</h3>
+<p>Anggota dapat menjual produk ke pasar nasional.</p>
 </div>
 
 <div class="card">
-<h3>Ekosistem Bisnis</h3>
-<p>Jaringan usaha nasional antar anggota.</p>
+<h3>Investor Network</h3>
+<p>Menghubungkan investor dengan pengusaha muda.</p>
 </div>
 
 </div>
@@ -277,34 +253,43 @@ usaha nasional dan global.
 
 <div class="container">
 
-<h2>Marketplace UMKM Anggota</h2>
+<h2>Marketplace UMKM</h2>
 
 <div class="cards">
 
-<div class="card">
+<div class="card product">
+
+<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
 
 <h3>Kopi Nusantara</h3>
-<p>Harga: Rp120.000</p>
 
-<button>Beli</button>
+<p>Rp120.000</p>
 
-</div>
-
-<div class="card">
-
-<h3>Batik Lokal</h3>
-<p>Harga: Rp350.000</p>
-
-<button>Beli</button>
+<button class="btn">Beli</button>
 
 </div>
 
-<div class="card">
+<div class="card product">
+
+<img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b">
+
+<h3>Batik Premium</h3>
+
+<p>Rp350.000</p>
+
+<button class="btn">Beli</button>
+
+</div>
+
+<div class="card product">
+
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
 
 <h3>Produk Agribisnis</h3>
-<p>Harga: Rp90.000</p>
 
-<button>Beli</button>
+<p>Rp95.000</p>
+
+<button class="btn">Beli</button>
 
 </div>
 
@@ -314,9 +299,9 @@ usaha nasional dan global.
 
 </section>
 
-<!-- PORTAL ANGGOTA -->
+<!-- LOGIN -->
 
-<section id="portal">
+<section id="login">
 
 <div class="container">
 
@@ -324,17 +309,11 @@ usaha nasional dan global.
 
 <div class="portal">
 
-<h3>Login Anggota</h3>
-
-<input type="text" placeholder="Email">
+<input type="email" placeholder="Email">
 
 <input type="password" placeholder="Password">
 
-<button class="btn" onclick="showSection('dashboard')">Login</button>
-
-<p style="text-align:center;margin-top:15px">
-Belum punya akun? Daftar di sekretariat koperasi
-</p>
+<button class="btn" onclick="show('dashboard')">Login</button>
 
 </div>
 
@@ -348,19 +327,53 @@ Belum punya akun? Daftar di sekretariat koperasi
 
 <div class="container">
 
-<h2>Dashboard Pengurus</h2>
+<h2>Dashboard Anggota</h2>
 
-<div class="dashboard">
+<div class="dashboard-grid">
 
-<p><b>Total Anggota:</b> 1.250</p>
+<div class="stat">
 
-<p><b>Total UMKM:</b> 380</p>
+<h3>Saldo Wallet</h3>
 
-<p><b>Total Aset Koperasi:</b> Rp 5.200.000.000</p>
-
-<p><b>Pinjaman Aktif:</b> Rp 1.800.000.000</p>
+<p>Rp 5.500.000</p>
 
 </div>
+
+<div class="stat">
+
+<h3>Simpanan</h3>
+
+<p>Rp 10.000.000</p>
+
+</div>
+
+<div class="stat">
+
+<h3>Pinjaman Aktif</h3>
+
+<p>Rp 3.000.000</p>
+
+</div>
+
+<div class="stat">
+
+<h3>SHU Tahun Ini</h3>
+
+<p>Rp 1.250.000</p>
+
+</div>
+
+</div>
+
+<br>
+
+<h3>Pengajuan Pinjaman</h3>
+
+<input type="number" placeholder="Jumlah Pinjaman">
+
+<input type="number" placeholder="Tenor (bulan)">
+
+<button class="btn">Ajukan Pinjaman</button>
 
 </div>
 
@@ -372,7 +385,7 @@ Belum punya akun? Daftar di sekretariat koperasi
 
 <div class="container">
 
-<h2>Instagram KOPMANTARA</h2>
+<h2>Media Sosial</h2>
 
 <iframe 
 src="https://www.instagram.com/kmpkopmantara/embed"
@@ -408,13 +421,13 @@ width="100%" height="500"></iframe>
 
 <footer>
 
-<p>© 2026 KOPMANTARA | Koperasi Multi Pihak Pengusaha Muda Mandiri Nusantara</p>
+<p>© 2026 KOPMANTARA DIGITAL PLATFORM</p>
 
 </footer>
 
 <script>
 
-function showSection(id){
+function show(id){
 
 document.querySelectorAll("section").forEach(sec=>{
 sec.style.display="none";
