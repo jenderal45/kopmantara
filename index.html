@@ -2,1603 +2,897 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>KOPMANTARA - Platform Koperasi Digital Indonesia</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOPMANTARA - Koperasi Multi Pihak</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
 <style>
-:root {
-    --primary: #0f172a;
-    --primary-light: #1e293b;
-    --accent: #f59e0b;
-    --accent-hover: #d97706;
-    --success: #10b981;
-    --danger: #ef4444;
-    --bg: #f8fafc;
-    --card-bg: #ffffff;
-    --text: #1e293b;
-    --text-light: #64748b;
-    --gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-    --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green-dark: #1a4a2e;
+    --green-mid: #2d6e45;
+    --green-light: #3d8c58;
+    --gold: #c8961e;
+    --gold-light: #e8b84b;
+    --cream: #f9f7f2;
+    --white: #ffffff;
+    --gray-light: #f3f4f6;
+    --gray: #6b7280;
+    --text: #1f2937;
+    --text-light: #4b5563;
+  }
+  body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 4px;
-}
-
-/* Navigation */
-header {
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-header.scrolled {
-    box-shadow: var(--shadow-lg);
-}
-
-.container {
-    width: 90%;
-    max-width: 1280px;
-    margin: auto;
-}
-
-.nav {
+  /* NAV */
+  nav {
+    background: var(--white);
+    padding: 0 60px;
+    height: 68px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: white;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: var(--green-dark);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .logo-icon svg { width: 30px; height: 30px; }
+  .logo-text h1 { font-size: 18px; font-weight: 800; line-height: 1; color: var(--green-dark); letter-spacing: 0.5px; }
+  .logo-text h1 span { color: var(--gold); }
+  .logo-text p { font-size: 9px; font-weight: 600; color: var(--gray); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 1px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { text-decoration: none; font-size: 13.5px; font-weight: 500; color: var(--text); transition: color .2s; padding-bottom: 2px; }
+  .nav-links a.active { color: var(--green-dark); border-bottom: 2px solid var(--green-dark); }
+  .nav-links a:hover { color: var(--green-dark); }
+  .btn-login {
+    background: var(--green-dark); color: var(--white);
+    padding: 9px 20px; border-radius: 6px;
+    font-size: 13px; font-weight: 600;
     text-decoration: none;
-}
+    display: flex; align-items: center; gap: 7px;
+    transition: background .2s;
+  }
+  .btn-login:hover { background: var(--green-mid); }
 
-.logo i {
-    color: var(--accent);
-    font-size: 1.8rem;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #f0f7f3 0%, #e8f4ee 40%, #f5f0e8 100%);
+    min-height: 520px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-}
-
-.nav-links a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.nav-links a:hover {
-    color: var(--accent);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* Hero Section */
-.hero {
-    min-height: 100vh;
-    background: var(--gradient);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
+    padding: 60px 60px 40px;
     position: relative;
     overflow: hidden;
-    padding: 100px 20px 50px;
-}
-
-.hero::before {
+  }
+  .hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.4;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    animation: fadeInUp 1s ease;
-}
-
-.hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    background: linear-gradient(to right, #ffffff, #fbbf24);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.btn {
-    padding: 14px 32px;
-    border-radius: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-    font-family: inherit;
-}
-
-.btn-primary {
-    background: var(--accent);
-    color: white;
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-}
-
-.btn-primary:hover {
-    background: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
-}
-
-.btn-secondary {
-    background: rgba(255,255,255,0.1);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-}
-
-.btn-secondary:hover {
-    background: rgba(255,255,255,0.2);
-    transform: translateY(-2px);
-}
-
-/* Stats Bar */
-.stats-bar {
-    background: white;
-    padding: 2rem 0;
-    margin-top: -50px;
-    position: relative;
-    z-index: 10;
-    border-radius: 20px;
-    box-shadow: var(--shadow-lg);
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1000px;
-    width: 90%;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    text-align: center;
-}
-
-.stat-item h3 {
-    font-size: 2rem;
-    color: var(--primary);
-    font-weight: 800;
-}
-
-.stat-item p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-}
-
-/* Sections */
-section {
-    padding: 80px 0;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.section-header h2 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.section-header p {
-    color: var(--text-light);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Feature Cards */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.feature-card {
-    background: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.05);
-    position: relative;
-    overflow: hidden;
-}
-
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.feature-card:hover::before {
-    transform: scaleX(1);
-}
-
-.feature-icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(245, 158, 11, 0.1);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-}
-
-.feature-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    color: var(--primary);
-}
-
-.feature-card p {
-    color: var(--text-light);
-    font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-/* Marketplace */
-.marketplace {
-    background: white;
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.product-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.05);
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.product-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.product-card:hover .product-image {
-    transform: scale(1.05);
-}
-
-.product-info {
-    padding: 1.5rem;
-}
-
-.product-category {
-    color: var(--accent);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.product-title {
-    font-size: 1.2rem;
-    margin: 0.5rem 0;
-    color: var(--primary);
-    font-weight: 600;
-}
-
-.product-price {
-    font-size: 1.25rem;
-    color: var(--primary);
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-/* Portal/Login */
-.portal-section {
-    background: var(--bg);
-}
-
-.portal-container {
-    max-width: 480px;
-    margin: 0 auto;
-    background: white;
-    padding: 3rem;
-    border-radius: 24px;
-    box-shadow: var(--shadow-lg);
-}
-
-.portal-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.portal-header i {
-    font-size: 3rem;
-    color: var(--accent);
-    margin-bottom: 1rem;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--primary);
-    font-size: 0.9rem;
-}
-
-.form-control {
-    width: 100%;
-    padding: 14px 18px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: #f8fafc;
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--accent);
-    background: white;
-    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-}
-
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-}
-
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    color: var(--text-light);
-}
-
-.forgot-link {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.btn-full {
-    width: 100%;
-    justify-content: center;
-}
-
-.divider {
-    text-align: center;
-    margin: 1.5rem 0;
-    position: relative;
-}
-
-.divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #e2e8f0;
-}
-
-.divider span {
-    background: white;
-    padding: 0 1rem;
-    position: relative;
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-.social-login {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn-social {
-    flex: 1;
-    padding: 12px;
-    border: 2px solid #e2e8f0;
-    background: white;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
-}
-
-.btn-social:hover {
-    border-color: var(--accent);
-    background: rgba(245, 158, 11, 0.05);
-}
-
-/* Dashboard */
-.dashboard-section {
-    background: var(--bg);
-    min-height: 100vh;
-    padding-top: 100px;
-}
-
-.dashboard-header {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.user-avatar {
-    width: 60px;
-    height: 60px;
-    background: var(--accent);
+    top: -60px; right: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200,150,30,0.08) 0%, transparent 70%);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
+  }
+  .hero-left { z-index: 2; }
+  .hero-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .hero-title { font-size: 44px; font-weight: 900; line-height: 1.1; color: var(--green-dark); margin-bottom: 4px; }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle { font-size: 42px; font-weight: 800; color: var(--green-dark); line-height: 1.1; margin-bottom: 8px; }
+  .hero-italic {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 40px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .hero-desc { font-size: 14px; color: var(--text-light); line-height: 1.7; max-width: 380px; margin-bottom: 28px; }
+  .hero-btns { display: flex; gap: 14px; }
+  .btn-primary {
+    background: var(--green-dark);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: background .2s;
+  }
+  .btn-primary:hover { background: var(--green-mid); }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--green-dark);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid #cde0d4;
+    transition: border-color .2s;
+  }
+  .btn-secondary:hover { border-color: var(--green-dark); }
 
-.user-details h3 {
-    color: var(--primary);
-    margin-bottom: 0.25rem;
-}
-
-.user-details p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.dashboard-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-}
-
-.dashboard-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.card-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-}
-
-.bg-primary { background: rgba(245, 158, 11, 0.1); color: var(--accent); }
-.bg-success { background: rgba(16, 185, 129, 0.1); color: var(--success); }
-.bg-danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
-.bg-info { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
-
-.card-label {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
-
-.card-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-.card-change {
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.positive { color: var(--success); }
-.negative { color: var(--danger); }
-
-/* Loan Application */
-.loan-form {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    margin-top: 2rem;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Instagram Feed */
-.instagram-section {
-    background: white;
-}
-
-.instagram-container {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-}
-
-/* Contact */
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
-    margin-top: 3rem;
-}
-
-.contact-info {
+  /* HERO RIGHT */
+  .hero-right {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-}
-
-.contact-icon {
-    width: 50px;
-    height: 50px;
-    background: rgba(245, 158, 11, 0.1);
-    border-radius: 12px;
-    display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--accent);
-    font-size: 1.25rem;
-    flex-shrink: 0;
-}
-
-.contact-details h4 {
-    color: var(--primary);
-    margin-bottom: 0.25rem;
-}
-
-.contact-details p {
-    color: var(--text-light);
-    font-size: 0.95rem;
-}
-
-/* Footer */
-footer {
-    background: var(--primary);
+    position: relative;
+    z-index: 2;
+  }
+  .hero-emblem {
+    width: 220px; height: 220px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 10px;
+  }
+  .emblem-circle {
+    width: 200px; height: 200px;
+    border: 3px solid var(--green-dark);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    background: radial-gradient(circle at center, #e8f4ee, #c8e0d0);
+  }
+  .emblem-inner {
+    width: 150px; height: 150px;
+    background: var(--green-dark);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .emblem-inner svg { width: 90px; height: 90px; color: var(--gold); }
+  .emblem-text {
+    position: absolute;
+    width: 200px; height: 200px;
+    top: 0; left: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .emblem-text svg { width: 200px; height: 200px; }
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 26px;
+    color: var(--green-dark);
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .hero-photo-strip {
+    position: absolute;
+    right: 0; top: 0;
+    width: 48%;
+    height: 100%;
+    background: linear-gradient(135deg, #2d5a3a, #1a3a26);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 1;
+    display: flex; align-items: center; justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero-photo-bg {
+    width: 100%; height: 100%;
+    background: url('https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80') center/cover;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(4px);
+    padding: 10px 16px;
+    border-radius: 8px;
     color: white;
-    padding: 4rem 0 2rem;
-}
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
+    z-index: 3;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .badge-arrow { color: var(--gold-light); font-size: 20px; }
 
-.footer-grid {
+  /* FEATURES BAR */
+  .features-bar {
+    background: var(--white);
+    border-radius: 12px;
+    margin: -20px 60px 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
+    grid-template-columns: repeat(4, 1fr);
+    padding: 24px 32px;
+    position: relative;
+    z-index: 10;
+    gap: 16px;
+  }
+  .feature-item { display: flex; align-items: flex-start; gap: 14px; padding: 0 8px; }
+  .feature-item + .feature-item { border-left: 1px solid #e5e7eb; }
+  .feature-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .feature-icon svg { width: 32px; height: 32px; color: var(--green-dark); }
+  .feature-text h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .feature-text p { font-size: 11.5px; color: var(--gray); line-height: 1.5; }
 
-.footer-brand .logo {
-    margin-bottom: 1rem;
-    display: inline-flex;
-}
+  /* SECTION COMMON */
+  section { padding: 64px 60px; }
+  .section-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-eyebrow::before, .section-eyebrow::after {
+    content: ''; display: block;
+    height: 1.5px; width: 32px;
+    background: var(--gold);
+  }
 
-.footer-brand p {
-    color: rgba(255,255,255,0.7);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-}
+  /* ABOUT */
+  .about-section { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 380px 1fr; gap: 56px; align-items: start; }
+  .about-left h2 { font-size: 32px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 16px; }
+  .about-left p { font-size: 14px; color: var(--text-light); line-height: 1.7; margin-bottom: 20px; }
+  .about-link { color: var(--green-dark); font-size: 13px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+  .about-link:hover { text-decoration: underline; }
+  .about-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .about-card {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .about-card:hover { border-color: var(--green-light); box-shadow: 0 4px 12px rgba(45,110,69,0.1); }
+  .about-card-icon {
+    width: 52px; height: 52px;
+    margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-card-icon svg { width: 40px; height: 40px; color: var(--green-dark); }
+  .about-card h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+  .about-card p { font-size: 11.5px; color: var(--gray); line-height: 1.5; }
 
-.footer-links h4 {
-    color: white;
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-}
+  /* SERVICES */
+  .services-section { background: var(--cream); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 36px; }
+  .services-header h2 { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1.2; max-width: 280px; }
+  .btn-outline {
+    border: 1.5px solid var(--green-dark);
+    color: var(--green-dark);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+    white-space: nowrap;
+  }
+  .btn-outline:hover { background: var(--green-dark); color: var(--white); }
+  .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .service-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px 20px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .service-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
+  .service-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+  }
+  .service-icon.green { background: var(--green-dark); }
+  .service-icon.gold { background: var(--gold); }
+  .service-icon svg { width: 26px; height: 26px; color: white; }
+  .service-card h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .service-card p { font-size: 12.5px; color: var(--gray); line-height: 1.6; margin-bottom: 14px; }
+  .service-link { color: var(--green-dark); font-size: 12.5px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 4px; }
 
-.footer-links ul {
-    list-style: none;
-}
+  /* STATS */
+  .stats-section {
+    background: var(--green-dark);
+    padding: 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .stat-item { display: flex; align-items: center; gap: 16px; }
+  .stat-item + .stat-item { border-left: 1px solid rgba(255,255,255,0.15); padding-left: 20px; }
+  .stat-icon { width: 40px; height: 40px; flex-shrink: 0; }
+  .stat-icon svg { width: 40px; height: 40px; color: rgba(255,255,255,0.8); }
+  .stat-num { font-size: 32px; font-weight: 900; color: var(--white); line-height: 1; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 2px; }
 
-.footer-links li {
-    margin-bottom: 0.75rem;
-}
+  /* NEWS */
+  .news-section { background: var(--white); }
+  .news-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .news-header h2 { font-size: 24px; font-weight: 800; }
+  .news-link { color: var(--green-dark); font-size: 13px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+  .news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .news-card { border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; transition: box-shadow .2s; }
+  .news-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.10); }
+  .news-img {
+    width: 100%; height: 160px;
+    object-fit: cover;
+    display: block;
+    background: #ccc;
+  }
+  .news-img-placeholder {
+    width: 100%; height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .news-img-placeholder.green { background: linear-gradient(135deg, #2d6e45, #1a4a2e); }
+  .news-img-placeholder.brown { background: linear-gradient(135deg, #6b4c1e, #8b6520); }
+  .news-img-placeholder.blue { background: linear-gradient(135deg, #1e3a5f, #2d5a8e); }
+  .news-img-placeholder.orange { background: linear-gradient(135deg, #c47a1e, #e89a3e); }
+  .news-body { padding: 16px; }
+  .news-tag {
+    display: inline-block;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 10px; font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .tag-green { background: #dcfce7; color: #166534; }
+  .tag-gold { background: #fef9c3; color: #854d0e; }
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+  .tag-orange { background: #ffedd5; color: #9a3412; }
+  .news-body h4 { font-size: 13.5px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; color: var(--text); }
+  .news-date { font-size: 11px; color: var(--gray); }
 
-.footer-links a {
+  /* FOOTER */
+  footer {
+    background: var(--green-dark);
+    color: rgba(255,255,255,0.85);
+    padding: 48px 60px 24px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 280px 1fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+  .footer-brand .logo-white h1 { font-size: 20px; font-weight: 800; color: var(--white); }
+  .footer-brand .logo-white h1 span { color: var(--gold-light); }
+  .footer-brand .logo-white p { font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: 1.5px; text-transform: uppercase; }
+  .footer-desc { font-size: 12.5px; line-height: 1.7; color: rgba(255,255,255,0.65); margin: 14px 0; }
+  .footer-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 16px;
+  }
+  .social-links { display: flex; gap: 10px; }
+  .social-link {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
     color: rgba(255,255,255,0.7);
     text-decoration: none;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
+    font-size: 14px;
+    transition: background .2s;
+  }
+  .social-link:hover { background: rgba(255,255,255,0.25); }
+  .footer-col h5 { font-size: 12px; font-weight: 700; color: var(--white); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .footer-col a { display: block; font-size: 12.5px; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 8px; transition: color .2s; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-contact-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+  .footer-contact-item svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; color: var(--gold-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: rgba(255,255,255,0.45);
+  }
+  .footer-bottom span { color: rgba(255,255,255,0.65); font-weight: 500; }
 
-.footer-links a:hover {
-    color: var(--accent);
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.social-links a {
-    width: 40px;
-    height: 40px;
-    background: rgba(255,255,255,0.1);
+  /* HERO PEOPLE IMAGE */
+  .hero-people {
+    position: absolute;
+    right: 0; top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .hero-people::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 80px; height: 100%;
+    background: linear-gradient(to right, #f0f7f3, transparent);
+    z-index: 2;
+  }
+  .people-bg {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #1a4a2e 0%, #2d6e45 50%, #4a8c3f 100%);
+    position: relative;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 20px;
+  }
+  /* People silhouettes */
+  .people-scene {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100%;
+    display: flex; align-items: flex-end; justify-content: center;
+    gap: 8px;
+    padding-bottom: 10px;
+  }
+  .person {
+    display: flex; flex-direction: column; align-items: center;
+    position: relative;
+  }
+  .person-body { background: rgba(255,255,255,0.15); border-radius: 4px 4px 0 0; }
+  /* Sunbeam */
+  .sunbeam {
+    position: absolute;
+    top: 0; right: 80px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(255,220,100,0.3) 0%, transparent 70%);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    transition: all 0.3s ease;
-}
+  }
 
-.social-links a:hover {
-    background: var(--accent);
-    transform: translateY(-3px);
-}
+  /* Landscape BG */
+  .landscape {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 45%;
+  }
 
-.footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 2rem;
-    text-align: center;
-    color: rgba(255,255,255,0.6);
-    font-size: 0.9rem;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .nav-links {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background: var(--primary);
-        flex-direction: column;
-        padding: 2rem;
-        gap: 1.5rem;
-        transform: translateY(-150%);
-        transition: transform 0.3s ease;
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .nav-links.active {
-        transform: translateY(0);
-    }
-    
-    .mobile-menu-btn {
-        display: block;
-    }
-    
-    .hero {
-        padding-top: 80px;
-    }
-    
-    .stats-bar {
-        margin-top: -30px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    
-    .portal-container {
-        padding: 2rem 1.5rem;
-        margin: 0 1rem;
-    }
-    
-    .dashboard-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    section {
-        padding: 60px 0;
-    }
-}
-
-/* Utility Classes */
-.hidden {
-    display: none !important;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.mt-4 {
-    margin-top: 2rem;
-}
-
-/* Loading State */
-.loading {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255,255,255,.3);
+  /* HERO RIGHT COMPOSITION */
+  .hero-right-content {
+    position: relative;
+    z-index: 3;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .green-shield {
+    width: 180px; height: 210px;
+    background: var(--green-dark);
+    clip-path: polygon(50% 0%, 100% 15%, 100% 75%, 50% 100%, 0% 75%, 0% 15%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .shield-inner {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .shield-globe { font-size: 32px; }
+  .shield-eagle {
+    width: 80px; height: 70px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 70% 30%, 100% 20%, 80% 50%, 100% 80%, 70% 70%, 50% 100%, 30% 70%, 0% 80%, 20% 50%, 0% 20%, 30% 30%);
+    margin-top: 4px;
+  }
+  .circular-badge {
+    position: relative;
+    width: 220px; height: 220px;
+    margin-bottom: 14px;
+  }
+  .circular-badge-ring {
+    width: 220px; height: 220px;
+    border: 2px solid var(--green-dark);
     border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s ease-in-out infinite;
-}
+    position: absolute; top: 0; left: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .circular-badge-inner {
+    width: 160px; height: 160px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 6px;
+  }
+  .badge-emoji { font-size: 36px; line-height: 1; }
+  .badge-sub { font-size: 10px; color: var(--gold-light); font-weight: 700; letter-spacing: 1px; text-align: center; }
+  .circular-text {
+    position: absolute; top: 0; left: 0;
+    width: 220px; height: 220px;
+  }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Toast Notification */
-.toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--primary);
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
-    z-index: 9999;
-    transform: translateX(400px);
-    transition: transform 0.3s ease;
-}
-
-.toast.show {
-    transform: translateX(0);
-}
-
-.toast.success {
-    background: var(--success);
-}
-
-/* Section Display Logic */
-.section-content {
-    display: none;
-    animation: fadeInUp 0.5s ease;
-}
-
-.section-content.active {
-    display: block;
-}
+  .eco-badge {
+    position: absolute;
+    bottom: 20px; right: 30px;
+    background: rgba(26,74,46,0.85);
+    border: 1px solid rgba(200,150,30,0.4);
+    padding: 8px 14px 8px 12px;
+    border-radius: 8px;
+    display: flex; align-items: center; gap: 10px;
+    z-index: 5;
+  }
+  .eco-badge-text { font-size: 11px; color: white; font-weight: 600; text-align: right; }
+  .eco-badge-arrow { color: var(--gold-light); font-size: 22px; font-weight: 700; }
 </style>
 </head>
 <body>
 
-<header id="navbar">
-    <div class="container nav">
-        <a href="#" class="logo" onclick="showSection('home')">
-            <i class="fas fa-handshake"></i>
-            <span>KOPMANTARA</span>
-        </a>
-        
-        <nav class="nav-links" id="navLinks">
-            <a onclick="showSection('home')">Beranda</a>
-            <a onclick="showSection('platform')">Platform</a>
-            <a onclick="showSection('market')">Marketplace</a>
-            <a onclick="showSection('dashboard')" id="navDashboard" class="hidden">Dashboard</a>
-            <a onclick="showSection('login')" id="navLogin">Login</a>
-            <a onclick="showSection('contact')">Kontak</a>
-        </nav>
-        
-        <button class="mobile-menu-btn" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 30 30" fill="none">
+        <path d="M15 2L28 10V20L15 28L2 20V10Z" fill="#c8961e" opacity="0.2"/>
+        <path d="M15 4L26 11V19L15 26L4 19V11Z" stroke="#c8961e" stroke-width="1.5" fill="none"/>
+        <path d="M15 8C15 8 10 12 10 17C10 20 12 22 15 22C18 22 20 20 20 17C20 12 15 8 15 8Z" fill="#c8961e"/>
+        <circle cx="15" cy="11" r="3" fill="white" opacity="0.9"/>
+      </svg>
     </div>
-</header>
+    <div class="logo-text">
+      <h1>KOPM<span>ANTARA</span></h1>
+      <p>Koperasi Multi Pihak</p>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active">Beranda</a>
+    <a href="#">Tentang Kami</a>
+    <a href="#">Layanan</a>
+    <a href="#">Anggota</a>
+    <a href="#">Berita</a>
+    <a href="#">Program</a>
+    <a href="#">Kontak</a>
+  </div>
+  <a href="#" class="btn-login">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Login Anggota
+  </a>
+</nav>
 
-<!-- HOME SECTION -->
-<section id="home" class="section-content active hero">
-    <div class="hero-content">
-        <h1>Membangun Ekonomi Kerakyatan Digital</h1>
-        <p>Platform koperasi modern yang menghubungkan pengusaha muda, UMKM, dan investor dalam satu ekosistem kolaboratif untuk kemakmuran bersama.</p>
-        <div class="hero-buttons">
-            <a class="btn btn-primary" onclick="showSection('login')">
-                <i class="fas fa-rocket"></i> Mulai Sekarang
-            </a>
-            <a class="btn btn-secondary" onclick="showSection('platform')">
-                <i class="fas fa-info-circle"></i> Pelajari Lebih
-            </a>
-        </div>
+<!-- HERO -->
+<section style="padding:0; position:relative; overflow:hidden; min-height:500px; background:linear-gradient(135deg,#eef7f2 0%,#f5f0e8 100%); display:grid; grid-template-columns:1fr 1fr; align-items:center;">
+  <div style="padding:60px 60px 80px; z-index:3; position:relative;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Koperasi Multi Pihak</div>
+    <h1 style="font-size:46px;font-weight:900;color:var(--green-dark);line-height:1.05;margin-bottom:0;">KOPM<span style="color:var(--gold);">ANTARA</span></h1>
+    <div style="font-size:32px;font-weight:800;color:var(--green-dark);line-height:1.2;margin-bottom:2px;">Ekonomi Kerakyatan</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:36px;color:var(--gold);font-weight:600;margin-bottom:20px;display:block;">Naik Kelas</div>
+    <p style="font-size:14px;color:var(--text-light);line-height:1.7;max-width:380px;margin-bottom:30px;">Bersama membangun ekonomi kerakyatan yang inklusif, berkelanjutan, dan berdampak nyata bagi kesejahteraan anggota dan masyarakat.</p>
+    <div style="display:flex;gap:14px;">
+      <a href="#" class="btn-primary">Gabung Sekarang →</a>
+      <a href="#" class="btn-secondary">Pelajari Lebih Lanjut</a>
     </div>
+  </div>
+
+  <!-- Right side -->
+  <div style="position:relative;height:500px;overflow:hidden;">
+    <!-- Green diagonal background -->
+    <div style="position:absolute;top:0;left:-40px;right:0;bottom:0;background:linear-gradient(160deg,#1a4a2e 0%,#2d6e45 60%,#3a7a50 100%);clip-path:polygon(12% 0,100% 0,100% 100%,0% 100%);z-index:1;"></div>
+    <!-- Landscape overlay at bottom -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(0deg,rgba(26,74,46,0.9) 0%,transparent 100%);z-index:2;"></div>
+    <!-- Emblem centered -->
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-40%,-50%);z-index:3;text-align:center;">
+      <div class="circular-badge">
+        <div class="circular-badge-ring">
+          <div class="circular-badge-inner">
+            <div class="badge-emoji">🌐</div>
+            <div style="width:60px;height:50px;background:var(--gold);clip-path:polygon(50% 0%,80% 20%,100% 60%,80% 100%,20% 100%,0% 60%,20% 20%);margin-top:4px;"></div>
+            <div class="badge-sub">KOPMANTARA</div>
+          </div>
+        </div>
+        <!-- Circular text -->
+        <svg class="circular-text" viewBox="0 0 220 220">
+          <defs><path id="circle-path" d="M 110,110 m -90,0 a 90,90 0 1,1 180,0 a 90,90 0 1,1 -180,0"/></defs>
+          <text font-size="9" fill="rgba(26,74,46,0.7)" font-family="Inter" font-weight="700" letter-spacing="3">
+            <textPath href="#circle-path">KOPERASI PENGUSAHA MUDA MANDIRI NUSANTARA •  </textPath>
+          </text>
+        </svg>
+      </div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:24px;color:white;font-weight:700;line-height:1.3;text-shadow:0 2px 8px rgba(0,0,0,0.4);">Maju Bersama<br>Mandiri Sejahtera</div>
+    </div>
+    <!-- People in green shirts silhouette -->
+    <div style="position:absolute;bottom:0;right:10px;z-index:2;display:flex;gap:4px;align-items:flex-end;padding-bottom:10px;opacity:0.7;">
+      <div style="width:40px;height:120px;background:rgba(255,255,255,0.2);border-radius:4px 4px 0 0;position:relative;">
+        <div style="width:24px;height:24px;background:rgba(255,255,255,0.3);border-radius:50%;position:absolute;top:-30px;left:8px;"></div>
+      </div>
+      <div style="width:40px;height:140px;background:rgba(255,255,255,0.25);border-radius:4px 4px 0 0;position:relative;">
+        <div style="width:24px;height:24px;background:rgba(255,255,255,0.35);border-radius:50%;position:absolute;top:-30px;left:8px;"></div>
+        <div style="position:absolute;top:-50px;left:10px;font-size:20px;">✊</div>
+      </div>
+      <div style="width:40px;height:125px;background:rgba(255,255,255,0.2);border-radius:4px 4px 0 0;position:relative;">
+        <div style="width:24px;height:24px;background:rgba(255,255,255,0.3);border-radius:50%;position:absolute;top:-30px;left:8px;"></div>
+      </div>
+    </div>
+    <!-- Badge bottom right -->
+    <div style="position:absolute;bottom:16px;right:16px;background:rgba(26,74,46,0.9);border:1px solid rgba(200,150,30,0.5);padding:8px 14px;border-radius:8px;z-index:4;display:flex;align-items:center;gap:10px;">
+      <div style="font-size:11px;color:white;font-weight:700;line-height:1.4;">Ekonomi Kerakyatan<br>Naik Kelas</div>
+      <div style="color:var(--gold-light);font-size:20px;font-weight:700;">↗</div>
+    </div>
+  </div>
 </section>
 
-<div class="stats-bar section-content active" id="homeStats">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h3>50K+</h3>
-                <p>Anggota Aktif</p>
-            </div>
-            <div class="stat-item">
-                <h3>Rp 500M</h3>
-                <p>Modal Tersalurkan</p>
-            </div>
-            <div class="stat-item">
-                <h3>1,200+</h3>
-                <p>UMKM Terdaftar</p>
-            </div>
-            <div class="stat-item">
-                <h3>98%</h3>
-                <p>Tingkat Kepuasan</p>
-            </div>
-        </div>
+<!-- FEATURES BAR -->
+<div class="features-bar">
+  <div class="feature-item">
+    <div class="feature-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     </div>
+    <div class="feature-text">
+      <h4>Multi Pihak</h4>
+      <p>Kolaborasi inklusif untuk kekuatan bersama.</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg>
+    </div>
+    <div class="feature-text">
+      <h4>Berkeberlanjutan</h4>
+      <p>Mengutamakan keberlanjutan ekonomi, sosial, dan lingkungan.</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="feature-text">
+      <h4>Transparan</h4>
+      <p>Tata kelola amanah, terbuka, dan akuntabel.</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+    </div>
+    <div class="feature-text">
+      <h4>Berdampak</h4>
+      <p>Memberi manfaat nyata bagi anggota & masyarakat.</p>
+    </div>
+  </div>
 </div>
 
-<!-- PLATFORM SECTION -->
-<section id="platform" class="section-content">
-    <div class="container">
-        <div class="section-header">
-            <h2>Ekosistem Digital Kami</h2>
-            <p>Solusi terintegrasi untuk memajukan koperasi dan UMKM Indonesia</p>
-        </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-building"></i>
-                </div>
-                <h3>Koperasi Digital</h3>
-                <p>Manajemen koperasi modern dengan sistem administrasi terotomatisasi, rapat daring, dan voting elektronik.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-hand-holding-usd"></i>
-                </div>
-                <h3>Pembiayaan Usaha (Bank/Pegadaian/LPDB)</h3>
-                <p>Pembiayaan fleksibel dengan bunga kompetitif, proses cepat, dan transparansi penuh untuk anggota.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-store"></i>
-                </div>
-                <h3>Marketplace UMKM</h3>
-                <p>Platform penjualan produk lokal ke pasar nasional dengan sistem logistik dan pembayaran terintegrasi.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Investor Network</h3>
-                <p>Menghubungkan investor dengan pengusaha mida berpotensi melalui sistem crowdfunding dan equity.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <h3>Edukasi & Training</h3>
-                <p>Program pelatihan digital, manajemen keuangan, dan pengembangan bisnis untuk anggota.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Keamanan Data</h3>
-                <p>Sistem keamanan berlapis dengan enkripsi end-to-end untuk melindungi data dan transaksi anggota.</p>
-            </div>
-        </div>
+<!-- ABOUT -->
+<section class="about-section" style="padding-top:72px;">
+  <div class="section-eyebrow">Tentang Kopmantara</div>
+  <div class="about-grid">
+    <div class="about-left">
+      <h2>Bersatu Menguatkan Ekonomi, Bersama Mewujudkan Sejahtera</h2>
+      <p>KOPMANTARA adalah koperasi multi pihak yang menghimpun berbagai unsur dan pemangku kepentingan untuk menciptakan nilai bersama, berkelanjutan, dan berdampak bagi masyarakat.</p>
+      <a href="#" class="about-link">Selengkapnya tentang kami →</a>
     </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+        </div>
+        <h4>Ekonomi Kerakyatan Naik Kelas</h4>
+        <p>Mendorong usaha anggota tumbuh, berdaya saing, dan berkelanjutan.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4>Pemberdayaan Anggota</h4>
+        <p>Penguatan kapasitas, akses permodalan, dan pendampingan usaha.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+        </div>
+        <h4>Kemandirian & Gotong Royong</h4>
+        <p>Menghidupkan nilai gotong royong untuk kemandirian ekonomi bersama.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h4>Kesejahteraan Bersama</h4>
+        <p>Mewujudkan kehidupan anggota dan masyarakat yang lebih sejahtera.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- MARKETPLACE SECTION -->
-<section id="market" class="section-content marketplace">
-    <div class="container">
-        <div class="section-header">
-            <h2>Marketplace UMKM</h2>
-            <p>Dukung produk lokal berkualitas dari anggota kami</p>
-        </div>
-        
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400" alt="Kopi" class="product-image">
-                <div class="product-info">
-                    <div class="product-category">Minuman</div>
-                    <h3 class="product-title">Kopi Arabika Gayo</h3>
-                    <div class="product-price">Rp125.000</div>
-                    <button class="btn btn-primary btn-full" onclick="addToCart('Kopi Arabika Gayo')">
-                        <i class="fas fa-shopping-cart"></i> Beli Sekarang
-                    </button>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400" alt="Batik" class="product-image">
-                <div class="product-info">
-                    <div class="product-category">Fashion</div>
-                    <h3 class="product-title">Batik Tulis Premium</h3>
-                    <div class="product-price">Rp450.000</div>
-                    <button class="btn btn-primary btn-full" onclick="addToCart('Batik Tulis Premium')">
-                        <i class="fas fa-shopping-cart"></i> Beli Sekarang
-                    </button>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="Makanan" class="product-image">
-                <div class="product-info">
-                    <div class="product-category">Kuliner</div>
-                    <h3 class="product-title">Paket Oleh-oleh Khas</h3>
-                    <div class="product-price">Rp185.000</div>
-                    <button class="btn btn-primary btn-full" onclick="addToCart('Paket Oleh-oleh Khas')">
-                        <i class="fas fa-shopping-cart"></i> Beli Sekarang
-                    </button>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" alt="Kerajinan" class="product-image">
-                <div class="product-info">
-                    <div class="product-category">Kerajinan</div>
-                    <h3 class="product-title">Anyaman Bambu Modern</h3>
-                    <div class="product-price">Rp275.000</div>
-                    <button class="btn btn-primary btn-full" onclick="addToCart('Anyaman Bambu Modern')">
-                        <i class="fas fa-shopping-cart"></i> Beli Sekarang
-                    </button>
-                </div>
-            </div>
-        </div>
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="section-eyebrow">Layanan Kami</div>
+  <div class="services-header">
+    <h2>Solusi Koperasi untuk Setiap Kebutuhan</h2>
+    <a href="#" class="btn-outline">Lihat Semua Layanan</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h4>Pembiayaan</h4>
+      <p>Solusi pembiayaan yang adil, mudah, dan mendukung pertumbuhan usaha.</p>
+      <a href="#" class="service-link">Selengkapnya →</a>
     </div>
+    <div class="service-card">
+      <div class="service-icon gold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </div>
+      <h4>Simpan Pinjam</h4>
+      <p>Produk simpanan dan pinjaman fleksibel untuk kebutuhan anggota.</p>
+      <a href="#" class="service-link">Selengkapnya →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <h4>Kemitraan Usaha</h4>
+      <p>Membangun jejaring dan kolaborasi usaha yang saling menguntungkan.</p>
+      <a href="#" class="service-link">Selengkapnya →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon gold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <h4>Pengembangan Kapasitas</h4>
+      <p>Pelatihan dan pendampingan untuk meningkatkan kompetensi anggota dan mitra.</p>
+      <a href="#" class="service-link">Selengkapnya →</a>
+    </div>
+  </div>
 </section>
 
-<!-- LOGIN SECTION -->
-<section id="login" class="section-content portal-section">
-    <div class="container">
-        <div class="portal-container">
-            <div class="portal-header">
-                <i class="fas fa-user-circle"></i>
-                <h2>Portal Anggota</h2>
-                <p>Masuk ke akun koperasi Anda</p>
-            </div>
-            
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" class="form-control" placeholder="nama@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" placeholder="••••••••" required>
-                </div>
-                
-                <div class="form-options">
-                    <label class="checkbox-label">
-                        <input type="checkbox"> Ingat saya
-                    </label>
-                    <a href="#" class="forgot-link">Lupa password?</a>
-                </div>
-                
-                <button type="submit" class="btn btn-primary btn-full">
-                    <i class="fas fa-sign-in-alt"></i> Masuk
-                </button>
-            </form>
-            
-            <div class="divider">
-                <span>atau masuk dengan</span>
-            </div>
-            
-            <div class="social-login">
-                <button class="btn-social" onclick="socialLogin('google')">
-                    <i class="fab fa-google" style="color: #ea4335;"></i>
-                </button>
-                <button class="btn-social" onclick="socialLogin('facebook')">
-                    <i class="fab fa-facebook-f" style="color: #1877f2;"></i>
-                </button>
-            </div>
-            
-            <p class="text-center mt-4" style="color: var(--text-light);">
-                Belum punya akun? <a href="#" style="color: var(--accent); text-decoration: none; font-weight: 600;">Daftar sekarang</a>
-            </p>
-        </div>
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-item">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     </div>
-</section>
+    <div>
+      <div class="stat-num">1.250+</div>
+      <div class="stat-label">Anggota Aktif</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </div>
+    <div>
+      <div class="stat-num">150+</div>
+      <div class="stat-label">Mitra & Kolaborator</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+    </div>
+    <div>
+      <div class="stat-num">320+</div>
+      <div class="stat-label">Usaha Terbantu</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <div>
+      <div class="stat-num">25+</div>
+      <div class="stat-label">Program Berjalan</div>
+    </div>
+  </div>
+</div>
 
-<!-- DASHBOARD SECTION -->
-<section id="dashboard" class="section-content dashboard-section">
-    <div class="container">
-        <div class="dashboard-header">
-            <div class="user-info">
-                <div class="user-avatar">AD</div>
-                <div class="user-details">
-                    <h3>Ahmad Dhani</h3>
-                    <p>Anggota Sejak 2024 • ID: KOP-2024-001</p>
-                </div>
-            </div>
-            <button class="btn btn-secondary" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Keluar
-            </button>
-        </div>
-        
-        <div class="dashboard-grid">
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-label">Saldo Wallet</div>
-                        <div class="card-value">Rp 5.500.000</div>
-                        <div class="card-change positive">
-                            <i class="fas fa-arrow-up"></i> +12% dari bulan lalu
-                        </div>
-                    </div>
-                    <div class="card-icon bg-primary">
-                        <i class="fas fa-wallet"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-label">Total Simpanan</div>
-                        <div class="card-value">Rp 12.000.000</div>
-                        <div class="card-change positive">
-                            <i class="fas fa-arrow-up"></i> +5% bunga tahunan
-                        </div>
-                    </div>
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-piggy-bank"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-label">Pinjaman Aktif</div>
-                        <div class="card-value">Rp 3.000.000</div>
-                        <div class="card-change negative">
-                            <i class="fas fa-clock"></i> 8 bulan tersisa
-                        </div>
-                    </div>
-                    <div class="card-icon bg-danger">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-label">SHU Tahun Ini</div>
-                        <div class="card-value">Rp 1.850.000</div>
-                        <div class="card-change positive">
-                            <i class="fas fa-gift"></i> Tahun 2025
-                        </div>
-                    </div>
-                    <div class="card-icon bg-info">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="loan-form">
-            <h3 style="margin-bottom: 1.5rem; color: var(--primary);">
-                <i class="fas fa-file-signature" style="color: var(--accent);"></i> Pengajuan Pinjaman Baru
-            </h3>
-            <form onsubmit="submitLoan(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Jumlah Pinjaman</label>
-                        <input type="number" class="form-control" placeholder="Rp 1.000.000" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tenor (Bulan)</label>
-                        <select class="form-control" required>
-                            <option value="">Pilih Tenor</option>
-                            <option value="6">6 Bulan</option>
-                            <option value="12">12 Bulan</option>
-                            <option value="24">24 Bulan</option>
-                            <option value="36">36 Bulan</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Tujuan Pinjaman</label>
-                    <textarea class="form-control" rows="3" placeholder="Jelaskan tujuan penggunaan dana..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-paper-plane"></i> Ajukan Pinjaman
-                </button>
-            </form>
-        </div>
+<!-- NEWS -->
+<section class="news-section">
+  <div class="section-eyebrow">Berita Terkini</div>
+  <div class="news-header">
+    <h2>Berita Terkini</h2>
+    <a href="#" class="news-link">Lihat Semua Berita →</a>
+  </div>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-img-placeholder green" style="display:flex;align-items:center;justify-content:center;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+      </div>
+      <div class="news-body">
+        <span class="news-tag tag-green">Kegiatan</span>
+        <h4>Rapat Anggota Tahunan KOPMANTARA 2024</h4>
+        <div class="news-date">20 Mei 2024</div>
+      </div>
     </div>
-</section>
-
-<!-- INSTAGRAM SECTION -->
-<section id="instagram" class="section-content instagram-section">
-    <div class="container">
-        <div class="section-header">
-            <h2><i class="fab fa-instagram" style="color: #e4405f;"></i> Media Sosial</h2>
-            <p>Ikuti perkembangan terbaru dari komunitas kami</p>
-        </div>
-        <div class="instagram-container">
-            <iframe 
-                src="https://www.instagram.com/kmpkopmantara/embed"
-                width="100%" 
-                height="600" 
-                frameborder="0" 
-                scrolling="no" 
-                allowtransparency="true"
-                style="border-radius: 20px;">
-            </iframe>
-        </div>
+    <div class="news-card">
+      <div class="news-img-placeholder brown" style="display:flex;align-items:center;justify-content:center;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="news-body">
+        <span class="news-tag tag-gold">Program</span>
+        <h4>Pelatihan Kewirausahaan bagi Anggota</h4>
+        <div class="news-date">15 Mei 2024</div>
+      </div>
     </div>
-</section>
-
-<!-- CONTACT SECTION -->
-<section id="contact" class="section-content">
-    <div class="container">
-        <div class="section-header">
-            <h2>Hubungi Kami</h2>
-            <p>Tim kami siap membantu Anda 24/7</p>
-        </div>
-        
-        <div class="contact-grid">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Kantor Pusat</h4>
-                        <p>Jl. Sudirman No. 123, Jakarta Pusat 10220</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Telepon</h4>
-                        <p>+62 21 1234 5678</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Email</h4>
-                        <p>info@kopmantara.co.id</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Jam Operasional</h4>
-                        <p>Senin - Jumat: 08.00 - 17.00 WIB</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="portal-container" style="margin: 0;">
-                <form onsubmit="submitContact(event)">
-                    <div class="form-group">
-                        <label>Nama Lengkap</label>
-                        <input type="text" class="form-control" placeholder="John Doe" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" placeholder="john@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Subjek</label>
-                        <input type="text" class="form-control" placeholder="Pertanyaan tentang..." required>
-                    </div>
-                    <div class="form-group">
-                        <label>Pesan</label>
-                        <textarea class="form-control" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">
-                        <i class="fas fa-paper-plane"></i> Kirim Pesan
-                    </button>
-                </form>
-            </div>
-        </div>
+    <div class="news-card">
+      <div class="news-img-placeholder blue" style="display:flex;align-items:center;justify-content:center;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="news-body">
+        <span class="news-tag tag-blue">Kemitraan</span>
+        <h4>Penandatanganan MoU dengan Mitra Strategis</h4>
+        <div class="news-date">10 Mei 2024</div>
+      </div>
     </div>
+    <div class="news-card">
+      <div class="news-img-placeholder orange" style="display:flex;align-items:center;justify-content:center;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
+      </div>
+      <div class="news-body">
+        <span class="news-tag tag-orange">Inspirasi</span>
+        <h4>Kisah Sukses Anggota: Tumbuh Bersama Koperasi</h4>
+        <div class="news-date">5 Mei 2024</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <a href="#" class="logo">
-                    <i class="fas fa-handshake"></i>
-                    <span>KOPMANTARA</span>
-                </a>
-                <p>Platform koperasi digital terdepan yang memberdayakan pengusaha muda dan UMKM Indonesia melalui teknologi dan kolaborasi.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Menu Cepat</h4>
-                <ul>
-                    <li><a onclick="showSection('home')"><i class="fas fa-chevron-right"></i> Beranda</a></li>
-                    <li><a onclick="showSection('platform')"><i class="fas fa-chevron-right"></i> Platform</a></li>
-                    <li><a onclick="showSection('market')"><i class="fas fa-chevron-right"></i> Marketplace</a></li>
-                    <li><a onclick="showSection('login')"><i class="fas fa-chevron-right"></i> Login</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Layanan</h4>
-                <ul>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Pembiayaan Usaha</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Investasi</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Pelatihan</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Konsultasi</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Syarat & Ketentuan</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Kebijakan Privasi</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Hak Cipta</a></li>
-                </ul>
-            </div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-white" style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:38px;height:38px;background:rgba(255,255,255,0.15);border-radius:7px;display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
+            <path d="M15 4L26 11V19L15 26L4 19V11Z" stroke="#c8961e" stroke-width="1.5" fill="none"/>
+            <path d="M15 8C15 8 10 12 10 17C10 20 12 22 15 22C18 22 20 20 20 17C20 12 15 8 15 8Z" fill="#c8961e"/>
+          </svg>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2026 KOPMANTARA Digital Platform. All rights reserved.</p>
+        <div>
+          <h1 style="font-size:18px;font-weight:800;color:white;line-height:1;">KOPM<span style="color:#e8b84b;">ANTARA</span></h1>
+          <p style="font-size:8px;color:rgba(255,255,255,0.45);letter-spacing:1.5px;text-transform:uppercase;">Koperasi Multi Pihak</p>
         </div>
+      </div>
+      <p class="footer-desc">Bersama membangun ekonomi kerakyatan naik kelas untuk kesejahteraan anggota dan masyarakat.</p>
+      <div class="footer-tagline">Maju Bersama Mandiri Sejahtera</div>
+      <div class="social-links">
+        <a href="#" class="social-link">f</a>
+        <a href="#" class="social-link" style="font-style:italic;">ig</a>
+        <a href="#" class="social-link">▶</a>
+        <a href="#" class="social-link" style="font-weight:700;">in</a>
+      </div>
     </div>
+    <div class="footer-col">
+      <h5>Tautan Cepat</h5>
+      <a href="#">Beranda</a>
+      <a href="#">Tentang Kami</a>
+      <a href="#">Layanan</a>
+      <a href="#">Anggota</a>
+      <a href="#">Berita</a>
+      <a href="#">Program</a>
+      <a href="#">Kontak</a>
+    </div>
+    <div class="footer-col">
+      <h5>Layanan</h5>
+      <a href="#">Pembiayaan</a>
+      <a href="#">Simpan Pinjam</a>
+      <a href="#">Kemitraan Usaha</a>
+      <a href="#">Pengembangan Kapasitas</a>
+    </div>
+    <div class="footer-col">
+      <h5>Informasi</h5>
+      <a href="#">FAQ</a>
+      <a href="#">Kebijakan Privasi</a>
+      <a href="#">Syarat & Ketentuan</a>
+    </div>
+    <div class="footer-col">
+      <h5>Kontak Kami</h5>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Jl. Mandiri Nusantara No. 123, Jakarta, Indonesia</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.07 6.07l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>(021) 1234 5678</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span>info@kopmantara.id</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span>www.kopmantara.id</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2024 KOPMANTARA. All rights reserved.</div>
+    <div><span>Koperasi Pengusaha Muda Mandiri Nusantara 🌿</span></div>
+  </div>
 </footer>
-
-<!-- Toast Notification -->
-<div id="toast" class="toast"></div>
-
-<script>
-// State Management
-let isLoggedIn = false;
-let currentUser = null;
-
-// Navigation
-function showSection(sectionId) {
-    // Hide all sections
-    document.querySelectorAll('.section-content').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Show target section
-    const target = document.getElementById(sectionId);
-    if (target) {
-        target.classList.add('active');
-        
-        // Special handling for home stats
-        if (sectionId === 'home') {
-            document.getElementById('homeStats').classList.add('active');
-        } else {
-            document.getElementById('homeStats').classList.remove('active');
-        }
-        
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    // Close mobile menu
-    document.getElementById('navLinks').classList.remove('active');
-    
-    // Update navbar visibility based on auth
-    updateNav();
-}
-
-function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('active');
-}
-
-// Auth Functions
-function handleLogin(e) {
-    e.preventDefault();
-    
-    // Simulate login
-    const btn = e.target.querySelector('button[type="submit"]');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<span class="loading"></span> Memuat...';
-    btn.disabled = true;
-    
-    setTimeout(() => {
-        isLoggedIn = true;
-        currentUser = { name: 'Ahmad Dhani', id: 'KOP-2024-001' };
-        
-        showToast('Login berhasil! Selamat datang kembali.', 'success');
-        showSection('dashboard');
-        
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-    }, 1500);
-}
-
-function logout() {
-    isLoggedIn = false;
-    currentUser = null;
-    showToast('Anda telah keluar dari sistem.');
-    showSection('home');
-}
-
-function socialLogin(provider) {
-    showToast(`Menghubungkan ke ${provider}...`);
-    setTimeout(() => {
-        isLoggedIn = true;
-        showSection('dashboard');
-    }, 1000);
-}
-
-function updateNav() {
-    const loginLink = document.getElementById('navLogin');
-    const dashboardLink = document.getElementById('navDashboard');
-    
-    if (isLoggedIn) {
-        loginLink.classList.add('hidden');
-        dashboardLink.classList.remove('hidden');
-    } else {
-        loginLink.classList.remove('hidden');
-        dashboardLink.classList.add('hidden');
-    }
-}
-
-// Feature Functions
-function addToCart(product) {
-    if (!isLoggedIn) {
-        showToast('Silakan login terlebih dahulu untuk berbelanja.');
-        showSection('login');
-        return;
-    }
-    showToast(`${product} ditambahkan ke keranjang!`, 'success');
-}
-
-function submitLoan(e) {
-    e.preventDefault();
-    showToast('Pengajuan pinjaman berhasil dikirim! Tim kami akan menghubungi Anda.', 'success');
-    e.target.reset();
-}
-
-function submitContact(e) {
-    e.preventDefault();
-    showToast('Pesan berhasil dikirim! Kami akan membalas segera.', 'success');
-    e.target.reset();
-}
-
-// Toast Notification
-function showToast(message, type = '') {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.className = 'toast ' + type;
-    
-    setTimeout(() => toast.classList.add('show'), 100);
-    setTimeout(() => toast.classList.remove('show'), 3000);
-}
-
-// Navbar Scroll Effect
-window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    showSection('home');
-    
-    // Check URL hash
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-        showSection(hash);
-    }
-});
-
-// Handle escape key to close mobile menu
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        document.getElementById('navLinks').classList.remove('active');
-    }
-});
-</script>
 
 </body>
 </html>
