@@ -1,0 +1,6 @@
+{
+  "name": "KOPMANTARA GROUP",
+  "description": "KOPMANTARA - Bersama membangun ekonomi kerakyatan yang inklusif, berkelanjutan, dan berdampak nyata bagi kesejahteraan anggota dan masyarakat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
